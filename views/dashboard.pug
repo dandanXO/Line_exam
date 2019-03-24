@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  .container
+    h1 Hi! #{userName} Welcome
+    form(action="add" method="post")
+      | 分店名稱:
+      
+      input.form-control(type='text', name='name', placeholder='name' ,required)
+      
+      |   分店電話:
+      br
+      input.form-control(type='text', name='phoneNumber', placeholder='phone Number',required)
+      br
+      |  分店地址:
+      br
+      input.form-control(type='text', name='address', placeholder='address',required)
+      br
+      button.btn.btn-primary(type='submit') 新增
+      br
+      br
+    .row.justify-content-around
+      .col-3.col-3.text-center
+        | 分店名稱
+      .col-3.col-3.text-center
+        | 分店電話
+      .col-3.col-3.text-center
+        | 分店地址
+      .col-3.col-3.text-center
+        | 操作
+    each val in stores
+      form.col-12(action="update" method="post")
+        .row.justify-content-around
+          .col-3.text-center
+            
+            input.form-control(type='text', name='name', value=val.name)
+          .col-3.text-center
+            input.form-control(type='text', name='phoneNumber', value=val.phoneNumber)
+          .col-3.text-center
+            input.form-control(type='text', name='address', value=val.address)
+          .col-3.text-center
+            input.form-control(type='text', name='id', value=val._id,style="display:none;")
+            button.btn.btn-warning(type='submit') 修改
+      form.col-6(action="delete" method="post")
+        input.form-control(type='text', name='id', value=val._id,style="display:none;")
+        button.btn.btn-danger(type='submit') 刪除
+
+
